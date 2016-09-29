@@ -37,6 +37,7 @@
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         height: 100%;
+        background: #f2f2f2;
         --primary-color: var(--paper-blue-500);
         --default-primary-color: var(--paper-blue-500);
         --light-primary-color: var(--paper-blue-100);
@@ -85,7 +86,7 @@
     </style>
     <template>
         <template is="dom-if" if="{{status.login}}">
-            <div class="layout vertical center-center">
+            <div class="layout vertical center-center fit" style="background:#fff">
                 <div style="font-size:1.4em;font-weight:400;margin-bottom:2em">Meet-Up Event Planner</div>
                 <div class="layout vertical" style="width:260px">
                     <paper-input value="{{login.email}}" no-label-float type="email" auto-validate error-message="Email validation fail!" required style="height:52px">
@@ -110,7 +111,7 @@
             </div>
         </template>
         <template is="dom-if" if="{{status.register}}">
-            <div class="layout vertical center-center">
+            <div class="layout vertical center-center fit" style="background:#fff">
                 <div style="font-size:1.4em;font-weight:400;margin-bottom:2em">Meet-Up Event Planner</div>
                 <div class="layout vertical" style="width:260px">
                     <paper-input value="{{reg.name}}" no-label-float auto-validate error-message="Name required!" required style="height:52px">
@@ -135,7 +136,7 @@
             </div>
         </template>
         <template is="dom-if" if="{{status.event}}">
-            <paper-header-panel mode="standard" style="background:#f2f2f2">
+            <paper-header-panel mode="standard">
                 <paper-toolbar>
                     <div class="layout horizontal center flex-auto" style="max-width:992px;margin:0 auto">
                         <paper-input value="{{filterString::input}}">
@@ -152,47 +153,42 @@
                 </paper-toolbar>
                 <div class="layout vertical">
                     <paper-fab icon="icons:add" on-tap="_openEventDialog" addevent></paper-fab>
-                    <div class="flex-auto">
-                        <div class="layout horizontal start-justified wrap" style="max-width:1024px;margin:0 auto;padding:8px">
-                            <template is="dom-repeat" items="{{events}}" as="event" filter="{{_filter(filterString)}}">
-                                <paper-material class="layout vertical event-card" elevation="1">
-                                    <div class="layout horizontal center">
-                                        <div class="flex"></div>
-                                        <paper-icon-button class="secondary-text-color" icon="icons:create" on-tap="_openEditDialog"></paper-icon-button>
-                                        <paper-icon-button class="secondary-text-color" icon="icons:delete" on-tap="_openRemoveDialog" delete></paper-icon-button>
+                    <div class="layout horizontal start-justified wrap" style="max-width:1024px;margin:0 auto;padding:8px">
+                        <template is="dom-repeat" items="{{events}}" as="event" filter="{{_filter(filterString)}}">
+                            <paper-material class="layout vertical event-card" elevation="1">
+                                <div class="layout horizontal center">
+                                    <div class="flex"></div>
+                                    <paper-icon-button class="secondary-text-color" icon="icons:create" on-tap="_openEditDialog"></paper-icon-button>
+                                    <paper-icon-button class="secondary-text-color" icon="icons:delete" on-tap="_openRemoveDialog" delete></paper-icon-button>
+                                </div>
+                                <div style="padding:16px">
+                                    <div style="font-size:24px">{{event.name}}</div>
+                                    <div class="layout vertical" style="margin-top:16px">
+                                        <div>{{event.type}}</div>
+                                        <div>{{event.host}}</div>
                                     </div>
-                                    <div style="padding:16px">
-                                        <div style="font-size:24px">{{event.name}}</div>
-                                        <div class="layout vertical" style="margin-top:16px">
-                                            <div>{{event.type}}</div>
-                                            <div>{{event.host}}</div>
+                                    <div class="layout horizontal" style="margin-top:16px">
+                                        <iron-icon icon="icons:event" style="min-width:24px"></iron-icon>
+                                        <div class="flex-auto" style="margin-left:8px">
+                                            <div>{{_dateTimeFormat(event.startTime)}}</div>
+                                            <div>{{_dateTimeFormat(event.endTime)}}</div>
                                         </div>
-                                        <div class="layout horizontal" style="margin-top:16px">
-                                            <iron-icon icon="icons:event" style="min-width:24px"></iron-icon>
-                                            <div class="flex-auto" style="margin-left:8px">
-                                                <div>{{_dateTimeFormat(event.startTime)}}</div>
-                                                <div>{{_dateTimeFormat(event.endTime)}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="layout horizontal" style="margin-top:4px">
-                                            <iron-icon icon="maps:place" style="min-width:24px"></iron-icon>
-                                            <a href="https://www.google.com/maps/place/{{event.location}}" target="_blank" style="margin-left:8px" hidden$="{{!event.location}}">{{event.location}}</a>
-                                        </div>
-                                        <div class="layout horizontal" style="margin-top:4px">
-                                            <iron-icon icon="social:group" style="min-width:24px"></iron-icon>
-                                            <div class="flex-auto" style="margin-left:8px">{{event.guest}}</div>
-                                        </div>
-                                        <div class="flex-auto secondary-text-color" style="margin-top:16px" hidden$="{{!event.message}}">{{event.message}}</div>
                                     </div>
-                                </paper-material>
-                            </template>
-                            <div class="event-card" style="visibility:hidden"></div>
-                            <div class="event-card" style="visibility:hidden"></div>
-                            <div class="event-card" style="visibility:hidden"></div>
-                        </div>
-                    </div>
-                    <div class="layout horizontal center-center" style="margin:24px 0 8px">
-                        <paper-button on-tap="_aboutMe" class="secondary-text-color">Powered By Marx Tseng</paper-button>
+                                    <div class="layout horizontal" style="margin-top:4px">
+                                        <iron-icon icon="maps:place" style="min-width:24px"></iron-icon>
+                                        <a href="https://www.google.com/maps/place/{{event.location}}" target="_blank" style="margin-left:8px" hidden$="{{!event.location}}">{{event.location}}</a>
+                                    </div>
+                                    <div class="layout horizontal" style="margin-top:4px">
+                                        <iron-icon icon="social:group" style="min-width:24px"></iron-icon>
+                                        <div class="flex-auto" style="margin-left:8px">{{event.guest}}</div>
+                                    </div>
+                                    <div class="flex-auto secondary-text-color" style="margin-top:16px" hidden$="{{!event.message}}">{{event.message}}</div>
+                                </div>
+                            </paper-material>
+                        </template>
+                        <div class="event-card" style="visibility:hidden"></div>
+                        <div class="event-card" style="visibility:hidden"></div>
+                        <div class="event-card" style="visibility:hidden"></div>
                     </div>
                 </div>
             </paper-header-panel>
@@ -403,7 +399,7 @@
         _registerAccount: function() {
             this.set('reg', {});
             this.set('error', null);
-            
+
             this.set('status', {
                 login: false,
                 register: true,
