@@ -1,6 +1,6 @@
 # Meet-Up Event Planner
 
-![ScreenShot](https://raw.github.com/marxtseng/meet-up-event-planner/master/Meet%20Up%20Event%20Planner.png)
+![ScreenShot](https://raw.githubusercontent.com/marxtseng/meet-up-event-planner/master/Meet%20Up%20Event%20Planner.png)
 
 ## Install the Polymer-CLI
 
