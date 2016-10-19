@@ -277,12 +277,12 @@
                 <paper-button dialog-confirm removeSubmit>Submit</paper-button>
             </div>
         </paper-dialog>
-        <firebase-app auth-domain="nd802-69249.firebaseapp.com" database-url="https://nd802-69249.firebaseio.com/" api-key="AIzaSyDsv_aQuCNzPqlpIaVItNUj_zRzK7Pfphs"></firebase-app>
+        <firebase-app auth-domain="" database-url="" api-key=""></firebase-app>
         <firebase-auth id="auth" user="{{user}}"></firebase-auth>
         <firebase-document id="info"></firebase-document>
         <firebase-query id="query" path="/users/{{user.uid}}/events" data="{{events}}"></firebase-query>
         <google-map-search map="{{map}}" query="{{currentPosition}}" results="{{results}}" global-search></google-map-search>
-        <google-map id="map" class="flex-auto" map="{{map}}" api-key="AIzaSyDsv_aQuCNzPqlpIaVItNUj_zRzK7Pfphs" style="display:none"></google-map>
+        <google-map id="map" class="flex-auto" map="{{map}}" api-key="" style="display:none"></google-map>
     </template>
     <script>
     Polymer({
